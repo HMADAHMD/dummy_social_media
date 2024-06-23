@@ -1,11 +1,18 @@
-.app-container {
-  display: flex;
+.form-container{
+
 }
 
-.content {
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
   width: 100%;
 }
 
-.sidebar {
-  min-height: 800px;
+.content{
+  background-color: red;
+  padding: 10px 50px;
 }
