@@ -3,13 +3,17 @@ import { createContext, useReducer } from "react";
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
+  addInitialPosts: () => {},
   deletePost: () => {}
 });
 
 const postListReducer = (currentPostList, action) => {
+  // let newPostList = currentPostList
   switch (action.type) {
     case "ADD_POST":
       return [...currentPostList, action.payload];
+    case "INITIAL_POST":
+      return action.payload.posts;
     case "DELETE_POST":
       return currentPostList.filter(post => post.id!== action.payload);
     default:
@@ -34,6 +38,14 @@ const PostListProvider = ({children}) => {
     dispatchPostList(addPostList);
   }
 
+  const addInitialPosts = (posts) => {
+    const addInitialPostsList = {
+      type: "INITIAL_POST",
+      payload: { posts }
+    };
+    dispatchPostList(addInitialPostsList);
+  }
+
   const deletePost = (postID) => {
     const deletePostList = {
       type: "DELETE_POST",
@@ -42,31 +54,16 @@ const PostListProvider = ({children}) => {
     dispatchPostList(deletePostList);
   }
 
-  const [postList, dispatchPostList] = useReducer(postListReducer, DEFAULT_POST_LIST);
+  const [postList, dispatchPostList] = useReducer(postListReducer, []);
 
 
-  return <PostList.Provider value={{postList, addPost, deletePost}}>
+  return <PostList.Provider value={{postList, addPost, deletePost, addInitialPosts}}>
     {children}
     </PostList.Provider>
 };
 
 const DEFAULT_POST_LIST = [
-  {
-    id: "1",
-    title: "trip to swat",
-    body: "The golden rays of the setting sun painted the sky in hues of orange and pink, casting long shadows across the tranquil meadow. Birds chirped melodiously from the treetops, adding a symphony to the evening’s serenity.",
-    reactions: 2,
-    userId: "uuid1",
-    tags: ["tour","trip","northern"]
-  },
-  {
-    id: "2",
-    title: "party",
-    body: "The golden rays of the setting sun painted the sky in hues of orange and pink, casting long shadows across the tranquil meadow. Birds chirped melodiously from the treetops, adding a symphony to the evening’s serenity.",
-    reactions: 10,
-    userId: "uuid2",
-    tags: ["college","party","enjoy"]
-  }
+  
 ]
 
 export default PostListProvider;
