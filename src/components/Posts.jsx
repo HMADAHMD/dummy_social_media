@@ -1,24 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Post from "./Post";
 import {PostList} from "../store/post-list-store";
 import Welcome from "./Welcome";
+import Loader from "./Loader";
 
 const Posts = () => {
-  const { postList, addInitialPosts } = useContext(PostList);
-  const handlePostsClick = () => {
-    fetch('https://dummyjson.com/posts')
-    .then(res => res.json())
-    .then(data => addInitialPosts(data.posts));
-  }
+  const { postList, fetching } = useContext(PostList);
 
   return(
   <>
-  {postList.length === 0 && <Welcome onGetPosts={handlePostsClick}></Welcome>}
-  {
-    postList.map((post) => (
-      <Post key={post.id} post={post}/>
-    ))
-  }
+    {fetching && <Loader/>}
+    {!fetching && postList.length === 0 && <Welcome></Welcome>}
+    {
+      !fetching && postList.map((post) => (
+        <Post key={post.id} post={post}/>
+      ))
+    }
   </>
 )
 }

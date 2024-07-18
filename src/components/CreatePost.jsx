@@ -16,12 +16,30 @@ const CreatePost = () => {
     const inputTitle = title.current.value;
     const inputBody = body.current.value;
     const inputReaction = reactions.current.value;
+    const userId = 1;
     const inputTags = tags.current.value.split(" ");
-    title.current.value = "";
-    body.current.value = "";
-    reactions.current.value = "";
-    tags.current.value = "";
-    addPost({title: inputTitle, body: inputBody, reactions: inputReaction, tags: inputTags})
+
+    // title.current.value = "";
+    // body.current.value = "";
+    // reactions.current.value = "";
+    // tags.current.value = "";
+
+    fetch('https://dummyjson.com/posts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: inputTitle,
+        body: inputBody,
+        reactions: inputReaction,
+        tags: inputTags,
+        userId: userId
+      })
+    })
+    .then(response => response.json())
+    .then(post => {
+      addPost(post)
+      console.log(post)
+    })
     event.preventDefault()
   }
 

@@ -16,14 +16,14 @@ const Post = ({post}) => {
         <AiOutlineLike/>
 
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {post.reactions.likes}
+            {/* {post.reactions.likes} */}
             <span className="visually-hidden">unread messages</span>
           </span>
         </button>
 
-        {post.tags.map((tag)=> (
+        {/* {post.tags.map((tag)=> (
           <span key={tag} className="badge text-bg-secondary" style={{margin: '2px'}}>{tag}</span>
-        ))}
+        ))} */}
       </div>
           <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
           onClick={() => deletePost(post.id)}>

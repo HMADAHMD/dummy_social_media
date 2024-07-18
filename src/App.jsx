@@ -14,8 +14,12 @@ function App() {
   return (
     <PostListProvider>
       <Header></Header>
-      <div className="sidebar"><Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}></Sidebar></div>
-      <div className="content" style={{padding: '10px 50px', backgroundColor: '#dbe8ff'}}>{selectedTab === "Home" ? <Posts></Posts> : <CreatePost />}</div>
+      <div className="sidebar">
+        <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}></Sidebar>
+      </div>
+      <div className="content" style={{padding: '10px 50px', backgroundColor: '#dbe8ff'}}>
+        {selectedTab === "Home" ? <Posts/> : <CreatePost />}
+      </div>
       <Footer></Footer>
     </PostListProvider>
   )
