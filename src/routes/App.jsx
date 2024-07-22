@@ -1,11 +1,12 @@
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Sidebar from './components/Sidebar';
-import CreatePost from './components/CreatePost';
-import Posts from './components/Posts';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Sidebar from '../components/Sidebar';
+import CreatePost from '../components/CreatePost';
+import Posts from '../components/Posts';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from 'react';
-import PostListProvider from './store/post-list-store';
+import PostListProvider from '../store/post-list-store';
+import { Outlet } from'react-router-dom';
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
       <div className="sidebar">
         <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}></Sidebar>
       </div>
-      <div className="content" style={{padding: '10px 50px', backgroundColor: '#dbe8ff'}}>
+      {/* <div className="content" style={{padding: '10px 50px', backgroundColor: '#dbe8ff'}}>
         {selectedTab === "Home" ? <Posts/> : <CreatePost />}
-      </div>
+      </div> */}
+      <Outlet/>
       <Footer></Footer>
     </PostListProvider>
   )

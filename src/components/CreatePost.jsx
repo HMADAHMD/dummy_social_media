@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { PostList } from "../store/post-list-store";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const CreatePost = () => {
 
   const { addPost } = useContext(PostList);
+  const navigate = useNavigate();
 
   const title = useRef();
   const body = useRef();
@@ -19,10 +21,10 @@ const CreatePost = () => {
     const userId = 1;
     const inputTags = tags.current.value.split(" ");
 
-    // title.current.value = "";
-    // body.current.value = "";
-    // reactions.current.value = "";
-    // tags.current.value = "";
+    title.current.value = "";
+    body.current.value = "";
+    reactions.current.value = "";
+    tags.current.value = "";
 
     fetch('https://dummyjson.com/posts/add', {
       method: 'POST',
@@ -38,6 +40,7 @@ const CreatePost = () => {
     .then(response => response.json())
     .then(post => {
       addPost(post)
+      navigate("/");
       console.log(post)
     })
     event.preventDefault()
